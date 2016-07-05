@@ -1,0 +1,30 @@
+.Modal {
+	display: none;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 900;
+}
+
+.Modal-backdrop {
+	background-color: #000;
+	height: 100vh;
+	opacity: 0.6;
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 100vw;
+}
+
+.Modal-inner {
+	background-color: #fff;
+	height: 80vh;
+	margin: -40vh -35vw;
+	position: absolute;
+	right: 50%;
+	top: 50%;
+	width: 70vw;
+}
+
+.Modal.is-shown {
+	display: block;
+}
