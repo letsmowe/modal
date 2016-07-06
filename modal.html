@@ -19,8 +19,8 @@
 
 <body>
 
-<a onclick="modal.show('Dialog-1')">Abrir modal 1</a>
-<button onclick="modal.show('Dialog-2')">Abrir modal 2</button>
+<button data-toggle="modal" data-target="Dialog-1">Abrir modal 1</button>
+<button data-toggle="modal" data-target="Dialog-2">Abrir modal 2</button>
 
 <div id="Dialog-1" class="Modal">
 	<div class="Modal-backdrop"></div>
@@ -33,13 +33,34 @@
 	<div class="Modal-backdrop"></div>
 	<div class="Modal-inner">
 		<span>dolor lorem</span>
-		<button onclick="modal.hide()">Fechar modal 2</button>
 	</div>
 </div>
 
 <script>
 
-	var modal = new Modal();
+	// Click on button with modal specifications
+	function modalButtonOnClick(event) {
+		try {
+			if (event.target.dataset.toggle == 'modal') {
+				var modal = Modal.getModalByID(event.target.dataset.target);
+				modal.switch();
+			}
+		} catch (e) { }
+	}
+
+	// Attach event click on document element with ie8 fallback
+	// Search and listen for elements with modal specifications
+	try {
+		document.addEventListener('click', modalButtonOnClick);
+	} catch (e) {
+		document.attachEvent('onclick', modalButtonOnClick);
+	}
+
+	// Create modal instance for each modal block found on page
+	var modals = document.querySelectorAll('.Modal');
+	for (var i = modals.length; i--;) {
+		modals[i].modal = new Modal(modals[i]);
+	}
 
 </script>
 
